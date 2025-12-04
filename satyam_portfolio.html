@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyam Sahu | Web Developer</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-dark: #0a0a12;
+            --bg-panel: #13131f;
+            --primary: #00f3ff; /* Neon Cyan */
+            --secondary: #bc13fe; /* Neon Purple */
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0b0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- BACKGROUND FX --- */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(var(--glass-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .orb-1 { top: -10%; left: -10%; background: var(--secondary); }
+        .orb-2 { bottom: -10%; right: -10%; background: var(--primary); }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0; width: 0%; height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--primary);
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a5b1c2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glitch-wrapper { position: relative; display: inline-block; }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--primary);
+            transition: 0.3s;
+            z-index: -1;
+        }
+        .btn:hover { color: #000; box-shadow: 0 0 20px var(--primary); }
+        .btn:hover::before { left: 0; }
+
+        /* --- SECTIONS COMMON --- */
+        section {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        .section-title span { color: var(--secondary); }
+
+        /* --- ABOUT --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-text { font-size: 1.1rem; color: var(--text-muted); }
+        .about-text p { margin-bottom: 20px; }
+        
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .skill-tag {
+            padding: 10px 20px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+        .skill-tag:hover {
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        /* --- PROJECTS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 10px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.2);
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .project-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; }
+        .tech-stack {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            text-align: center;
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: var(--bg-panel);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            transition: 0.3s;
+        }
+        .social-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 20px var(--primary);
+            transform: scale(1.1);
+        }
+        .insta:hover { background: #E1306C; color: white; box-shadow: 0 0 20px #E1306C; }
+        .email:hover { background: #EA4335; color: white; box-shadow: 0 0 20px #EA4335; }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            background: #050508;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; }
+            nav { padding: 20px; }
+            .nav-links { display: none; } /* Simplified for mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND FX -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">SATYAM<span style="color:var(--secondary)">.DEV</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h2>Hello, World. I am</h2>
+        <h1>Satyam Sahu</h1>
+        <p>A passionate Web Developer & Coder building interactive digital experiences with modern technologies.</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <!-- ABOUT & SKILLS SECTION -->
+    <section id="about">
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I am a dedicated <strong>Web Developer</strong> with a knack for solving complex problems through code. My journey involves not just building websites, but creating functional, aesthetic, and user-centric digital solutions.
+                </p>
+                <p>
+                    Whether it's crafting a responsive front-end or training machine learning models in Python, I am constantly learning and evolving. I enjoy turning raw ideas into working products that make a difference.
+                </p>
+            </div>
+            <div id="skills">
+                <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: var(--secondary);">Tech Stack</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag"><i class="fab fa-html5"></i> HTML5</div>
+                    <div class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</div>
+                    <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-tag"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill-tag"><i class="fas fa-database"></i> SQL</div>
+                    <div class="skill-tag"><i class="fab fa-cuttlefish"></i> C / C++</div>
+                    <div class="skill-tag"><i class="fab fa-php"></i> Basic PHP</div>
+                    <div class="skill-tag"><i class="fas fa-desktop"></i> OS</div>
+                    <div class="skill-tag"><i class="fas fa-file-excel"></i> MS Excel</div>
+                    <div class="skill-tag"><i class="fas fa-paint-brush"></i> Photoshop</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <h2 class="section-title">My <span>Projects</span></h2>
+        <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <div class="project-card">
+                <h3>News Feed App</h3>
+                <p class="project-desc">
+                    A dynamic web application that aggregates real-time news into an endless scroll interface. Features include advanced search filtering, a toggleable light/dark theme, bookmarking capabilities, and integrated social sharing for seamless content distribution.
+                </p>
+                <div class="tech-stack">HTML • CSS • JavaScript</div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <h3>Alphanumeric Classifier</h3>
+                <p class="project-desc">
+                    A machine learning model developed in Python that accurately identifies handwritten characters and digits. The system processes input images and generates a visual probability chart, demonstrating advanced image recognition capabilities.
+                </p>
+                <div class="tech-stack">Python • ML • Computer Vision</div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <h3>MedReturn Platform</h3>
+                <p class="project-desc">
+                    An eco-conscious multi-page website designed to facilitate the return of unused pharmaceuticals. This platform aims to reduce medical waste and prevent environmental contamination by connecting users with safe disposal channels.
+                </p>
+                <div class="tech-stack">HTML • CSS • JS • Responsive Design</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Get In <span>Touch</span></h2>
+            <p style="color: var(--text-muted);">Have a project in mind or just want to say hi? Connect with me on social media!</p>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/satyam-sahu-37b97a368" target="_blank" class="social-btn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/1907Satyam" target="_blank" class="social-btn">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/satyam_sahu__1907" target="_blank" class="social-btn insta">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:satyamsahu16906@gmail.com" class="social-btn email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Satyam Sahu. All Rights Reserved. | Built for CODTECH Internship.</p>
+    </footer>
+
+</body>
+</html>

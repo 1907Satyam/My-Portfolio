@@ -184,6 +184,13 @@
         }
         .btn-alt::before { background: var(--secondary); }
         .btn-alt:hover { box-shadow: 0 0 20px var(--secondary); }
+        
+        /* Smaller buttons for project cards */
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
 
         /* --- SECTIONS COMMON --- */
         section {
@@ -246,6 +253,8 @@
             transition: 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Ensure proper stacking for buttons */
         }
         .project-card:hover, .cert-card:hover {
             transform: translateY(-10px);
@@ -260,12 +269,20 @@
         }
 
         .project-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .project-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; }
+        .project-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; }
         .tech-stack {
             font-size: 0.8rem;
             color: var(--primary);
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        /* Project CTA Links */
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: auto; /* Pushes buttons to the bottom of the card */
         }
 
         /* --- CERTIFICATE SPECIFIC --- */
@@ -378,14 +395,15 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-<section class="hero">
+    
+    <section class="hero">
         <h2>Hello, World. I am</h2>
         <h1>Satyam Sahu</h1>
         <p>A passionate Web Developer & Coder building interactive digital experiences with modern technologies.</p>
         
         <div class="hero-buttons">
             <a href="#projects" class="btn">View My Work</a>
-            <a href="Satyam_Sahu_Resume.pdf" class="btn btn-alt" download="Satyam_Sahu_Resume.pdf">
+            <a href="Satyam_Sahu_Resume.pdf" class="btn btn-alt" target="_blank" onclick="trackResumeDownload()">
                 Download Resume <i class="fas fa-download"></i>
             </a>
         </div>
@@ -429,18 +447,30 @@
                 <h3>News Feed App</h3>
                 <p class="project-desc">A dynamic web application that aggregates real-time news with endless scroll, search filtering, and toggleable themes.</p>
                 <div class="tech-stack">HTML • CSS • JavaScript</div>
+                <div class="project-links">
+                    <a href="https://1907satyam.github.io/News_Feed/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/News_Feed" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
 
             <div class="project-card">
                 <h3>Alphanumeric Classifier</h3>
                 <p class="project-desc">A Python-based ML model identifying handwritten characters and digits with visual probability chart outputs.</p>
                 <div class="tech-stack">Python • ML • Computer Vision</div>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/AlphanumericClassifier" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
 
             <div class="project-card">
                 <h3>MedReturn Platform</h3>
                 <p class="project-desc">Eco-conscious platform designed to reduce medical waste by facilitating the return of unused pharmaceuticals.</p>
                 <div class="tech-stack">HTML • CSS • JS • Responsive Design</div>
+                <div class="project-links">
+                    <a href="https://1907satyam.github.io/MedReturn/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/MedReturn" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
 
             <div class="project-card">
@@ -449,18 +479,30 @@
                     A centralized digital hub designed to manage college sports events and student registrations. It streamlines the signup process and enables organizers to track participation and event schedules efficiently.
                 </p>
                 <div class="tech-stack">Python • SQL • Web Forms</div>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/CampusPulse" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
 
             <div class="project-card">
                 <h3>Interactive Quiz App</h3>
                 <p class="project-desc">JavaScript platform with dynamic question loading, countdown timers, and responsive dark-mode UI.</p>
                 <div class="tech-stack">HTML • CSS • JavaScript</div>
+                <div class="project-links">
+                    <a href="https://1907satyam.github.io/Interactive-Quiz-App/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/Interactive-Quiz-App" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
 
             <div class="project-card">
                 <h3>Real-Time Chat App</h3>
                 <p class="project-desc">Secure Python messaging application with a Telegram-inspired custom dark theme and user authentication.</p>
                 <div class="tech-stack">Python • GUI • Networking</div>
+                <div class="project-links">
+                    <a href="#" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    <a href="https://github.com/1907Satyam/ChatApp" target="_blank" class="btn btn-sm btn-alt"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
         </div>
     </section>
@@ -564,6 +606,22 @@
         <p>&copy; 2026 Satyam Sahu. Designed & Developed by Satyam Sahu.</p>
     </footer>
 
+    <script>
+        function trackResumeDownload() {
+            // Logs to the developer console to confirm the script is running
+            console.log("Analytics Tracking: Resume file downloaded.");
+            
+            // Uncomment the code below if you are using Google Analytics (gtag.js)
+            /*
+            if (typeof gtag === 'function') {
+                gtag('event', 'file_download', {
+                    'file_name': 'Satyam_Sahu_Resume.pdf',
+                    'file_extension': 'pdf',
+                    'link_text': 'Download Resume'
+                });
+            }
+            */
+        }
+    </script>
 </body>
 </html>
-

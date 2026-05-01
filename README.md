@@ -1,4 +1,4 @@
-# 🌐 Personal Portfolio Webpage (Task 3)
+# 🌐 Personal Portfolio Webpage 
 
 This repository contains my personal portfolio website, designed and developed as part of my internship at **CODTECH IT Solutions**. The project showcases my skills, projects, and professional background in a modern, interactive single-page application.
 
